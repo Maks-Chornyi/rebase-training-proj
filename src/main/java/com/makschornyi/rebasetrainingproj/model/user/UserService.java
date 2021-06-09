@@ -1,5 +1,7 @@
 package com.makschornyi.rebasetrainingproj.model.user;
 
+import com.makschornyi.rebasetrainingproj.model.user.exception.UserAlreadyExistException;
+import com.makschornyi.rebasetrainingproj.model.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,10 +12,10 @@ public class UserService {
 
     public User createUser(User user) {
         if (users.containsKey(user.getId())) {
-            throw new RuntimeException("User already exist");
-        } else {
-            users.put(user.getId(), user);
+            throw new UserAlreadyExistException("User already exist");
         }
+        users.put(user.getId(), user);
+
         return user;
     }
 
@@ -23,7 +25,7 @@ public class UserService {
 
     public User findById(String id) {
         if (!users.containsKey(UUID.fromString(id))) {
-            throw new RuntimeException("No user with such id");
+            throw new UserNotFoundException("User with id: " + id + " not found.");
         }
         return users.get(UUID.fromString(id));
     }
