@@ -2,9 +2,7 @@ package com.makschornyi.rebasetrainingproj.model.user;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -17,5 +15,16 @@ public class UserService {
             users.put(user.getId(), user);
         }
         return user;
+    }
+
+    public List<User> findAll() {
+        return new ArrayList<>(users.values());
+    }
+
+    public User findById(String id) {
+        if (!users.containsKey(UUID.fromString(id))) {
+            throw new RuntimeException("No user with such id");
+        }
+        return users.get(UUID.fromString(id));
     }
 }
