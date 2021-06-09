@@ -1,4 +1,4 @@
-package com.makschornyi.rebasetrainingproj.model.user;
+package com.makschornyi.rebasetrainingproj.model.user.exception;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String msg) {
